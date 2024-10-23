@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../../context/AuthContext';
 import { selectProducts } from '../../store/selectors/productsSelector';
 import { getProducts } from '../../api/restProducts';
+import Table from '../../components/table/Table';
 import './styles.scss';
 
 const Products: React.FC = () => {
@@ -33,7 +34,9 @@ const Products: React.FC = () => {
 
   return (
     <div>
-
+      <div>
+        <Table products={products} />
+      </div>
     </div>
   )
 }

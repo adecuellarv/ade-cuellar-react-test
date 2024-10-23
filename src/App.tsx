@@ -7,6 +7,8 @@ import Products from './pages/products/Products';
 import NotFound from './pages/not-found/NotFound';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import PrivateRoute from './components/common/PrivateRoute';
+import 'primereact/resources/primereact.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 
 const App: React.FC = () => {
   return (
