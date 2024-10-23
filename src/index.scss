@@ -36,8 +36,25 @@ code {
       opacity: 0.5;
     }
   }
+  span{
+    font-size: 10px;
+  }
+  .label-msg{
+    color: #de1212;
+  }
+  .border-error{
+    border: 1px solid #de1212;;
+  }
+  .border-input{
+    border: 1px solid #dbdbdb;
+  }
+  .color-error{
+    color: #de1212 !important;
+  }
+  .color-success{
+    color: green !important;
+  }
 }
-
 .container-button {
   margin-top: 20px;
   .d-right {
