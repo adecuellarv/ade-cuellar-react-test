@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { selectUsers } from '../../store/selectors/userSelector';
 import { useAuth } from '../../context/AuthContext';
 import { User } from '../../models';
@@ -46,6 +47,13 @@ const Login: React.FC = () => {
 
       login();
       navigate('/products');
+    } else {
+      Swal.fire({
+        title: 'Faltan datos',
+        text: '',
+        icon: 'error',
+        confirmButtonText: '¡Entendido!'
+      })
     }
   };
 

@@ -43,10 +43,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     if (!isTokenValid()) {
       setIsAuthenticated(false)
-      //navigate('/login');
     } else {
       setIsAuthenticated(true)
-      //navigate('/products');
     }
   }, []);
 
