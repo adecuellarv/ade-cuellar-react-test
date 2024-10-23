@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import CryptoJS from 'crypto-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectUsers } from '../../store/selectors/userSelector';
 import { useAuth } from '../../context/AuthContext';
+import { User } from '../../models';
 import './styles.scss';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const firstInput = 1, successInput = 2, errorInput = 3;
 const Login: React.FC = () => {
-  const { login } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(true);
   const [pwd1, setPwd1] = useState('');
@@ -20,15 +26,27 @@ const Login: React.FC = () => {
   const [conditionLettChar, setConditionLettCharValid] = useState(firstInput);
   const [conditionNumber, setConditionNumberValid] = useState(firstInput);
   const [showConditions, setShowConditions] = useState(false);
+  const users = useSelector(selectUsers);
 
   const handleLogin = () => {
-    console.log('llave', process.env.REACT_APP_SECRET_KEY)
     if (email && pwd1 && pwd2 && emailValid && pwd1Valid && pwd2Valid) {
       const secretKey: any = process.env.REACT_APP_SECRET_KEY;
       const encryptedPassword = CryptoJS.AES.encrypt(pwd1, secretKey).toString();
-      alert('success')
+
+      const values: User = {
+        id: users?.length + 1,
+        email,
+        password: encryptedPassword
+      }
+
+      dispatch({
+        type: 'ADD_USER',
+        payload: values,
+      });
+
+      login();
+      navigate('/products');
     }
-    //login();
   };
 
   useEffect(() => {
@@ -83,6 +101,10 @@ const Login: React.FC = () => {
       setConditionNumberValid(firstInput)
     }
   }, [pwd1]);
+
+  useEffect(() => {
+    if(isAuthenticated) navigate('/products')
+  }, [isAuthenticated])
 
   return (
     <div className='container-login'>
