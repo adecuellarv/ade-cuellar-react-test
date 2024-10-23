@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CryptoJS from 'crypto-js';
 import { useAuth } from '../../context/AuthContext';
 import './styles.scss';
 
@@ -21,7 +22,10 @@ const Login: React.FC = () => {
   const [showConditions, setShowConditions] = useState(false);
 
   const handleLogin = () => {
-    if (email && pwd1 && pwd2 && emailValid && pwd1Valid && pwd2Valid){
+    console.log('llave', process.env.REACT_APP_SECRET_KEY)
+    if (email && pwd1 && pwd2 && emailValid && pwd1Valid && pwd2Valid) {
+      const secretKey: any = process.env.REACT_APP_SECRET_KEY;
+      const encryptedPassword = CryptoJS.AES.encrypt(pwd1, secretKey).toString();
       alert('success')
     }
     //login();
