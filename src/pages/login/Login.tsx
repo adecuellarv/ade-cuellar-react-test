@@ -1,7 +1,13 @@
 import React from 'react';
+import { useAuth } from '../../context/AuthContext';
 import './styles.scss';
 
 const Login: React.FC = () => {
+  const { login } = useAuth();
+
+  const handleLogin = () => {
+    //login();
+  };
   return (
     <div className='container-login'>
       <div className='text-center'>
@@ -31,7 +37,10 @@ const Login: React.FC = () => {
         </div>
         <div className='container-button'>
           <div className='d-right'>
-            <button className='button b-blue'>Crear</button>
+            <button 
+              className='button b-blue'
+              onClick={handleLogin}
+            >Crear</button>
           </div>
         </div>
       </div>
