@@ -34,7 +34,21 @@ const Products: React.FC = () => {
 
   return (
     <div>
-      <div>
+      <div className='div-search'>
+        <div className='container-input'>
+          <input
+            type='text'
+            placeholder='Ej Snikers'
+          //onChange={(e) => setEmail(e.target.value)}
+          //onBlur={() => setEmailValid(emailRegex.test(email))}
+          //className={!emailValid ? 'border-error' : ''}
+          />
+        </div>
+        <div>
+          <button className='button b-blue'>Buscar</button>
+        </div>
+      </div>
+      <div className='div-table'>
         <Table products={products} />
       </div>
     </div>

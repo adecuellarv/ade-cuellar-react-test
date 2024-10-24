@@ -36,22 +36,22 @@ code {
       opacity: 0.5;
     }
   }
-  span{
+  span {
     font-size: 10px;
   }
-  .label-msg{
+  .label-msg {
     color: #de1212;
   }
-  .border-error{
-    border: 1px solid #de1212;;
+  .border-error {
+    border: 1px solid #de1212;
   }
-  .border-input{
+  .border-input {
     border: 1px solid #dbdbdb;
   }
-  .color-error{
+  .color-error {
     color: #de1212 !important;
   }
-  .color-success{
+  .color-success {
     color: green !important;
   }
 }
@@ -60,27 +60,27 @@ code {
   .d-right {
     text-align: right;
   }
-  .button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+}
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 
-    &:active {
-      transform: scale(0.95);
-    }
+  &:active {
+    transform: scale(0.95);
   }
-  .b-blue {
-    background: #2196F3;
-    color: #fff;
-    &:hover {
-      background-color: #50b1ff;
-    }
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px #50b1ff;
-    }
+}
+.b-blue {
+  background: #2196f3;
+  color: #fff;
+  &:hover {
+    background-color: #50b1ff;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px #50b1ff;
   }
 }

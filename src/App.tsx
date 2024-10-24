@@ -7,23 +7,36 @@ import Products from './pages/products/Products';
 import NotFound from './pages/not-found/NotFound';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import PrivateRoute from './components/common/PrivateRoute';
+import Header from './components/common/header/Header';
 import 'primereact/resources/primereact.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primeicons/primeicons.css';
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
       <AuthProvider>
         <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<RedirectBasedOnAuth />} />
-            <Route path="/products" element={<PrivateRoute element={<Products />} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <MainLayout />
         </Router>
       </AuthProvider>
     </Provider>
+  );
+};
+
+const MainLayout: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+
+  return (
+    <>
+      {isAuthenticated && <Header />}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<RedirectBasedOnAuth />} />
+        <Route path="/products" element={<PrivateRoute element={<Products />} />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 

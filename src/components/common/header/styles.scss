@@ -1,0 +1,16 @@
+.menu-user{
+  position: relative;
+  .sub-menu{
+    position: absolute;
+    background: #fff;
+    right: 0px;
+    width: 150px;
+    text-align: right;
+    padding: 7px 20px;
+    box-shadow: 10px 10px 19px -8px rgb(117, 117, 117);
+    p{
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+  }
+}
