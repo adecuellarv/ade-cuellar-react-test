@@ -1,26 +1,29 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
 import { useAuth } from '../../../context/AuthContext';
 import './styles.scss';
 
-const items = [
-  {
-    label: 'Productos',
-    icon: 'pi pi-list',
-    command: () => alert('hey')
-  }
-];
+
 
 const Header: React.FC = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const [showSubMenu, setShowSubmenu] = useState(false);
 
   const handleLogout = () => {
     logout();
   }
   
+  const items = [
+    {
+      label: 'Productos',
+      icon: 'pi pi-list',
+      command: () => { navigate('/products') }
+    }
+  ];
 
   const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
   const end = (
