@@ -38,7 +38,7 @@ const Table: React.FC<TableProps> = ({ products }) => {
   };
 
   const ratingBodyTemplate = (product: Product) => {
-    return <Rating value={product.rating} readOnly cancel={false} />;
+    return <Rating value={product.rating.rate} readOnly cancel={false} />;
   };
 
   const handleRowClick = (event: any) => {

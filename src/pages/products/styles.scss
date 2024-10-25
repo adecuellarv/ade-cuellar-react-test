@@ -1,7 +1,13 @@
 .div-search{
   display: flex;
-  width: 95%;
+  width: 50%;
   margin: 0 auto;
+  div{
+    flex: 1;
+  }
+  .div-btn-search{
+    margin-top: 6px;
+  }
 }
 .div-table{
   width: 95%;

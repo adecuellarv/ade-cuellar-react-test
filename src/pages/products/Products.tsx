@@ -1,23 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from 'primereact/button';
 import { useAuth } from '../../context/AuthContext';
 import { selectProducts } from '../../store/selectors/productsSelector';
 import { getProducts } from '../../api/restProducts';
 import Table from '../../components/table/Table';
+import { searchFilter } from '../../helpers/common';
 import './styles.scss';
+
 
 const Products: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated } = useAuth();
-  const products = useSelector(selectProducts); console.log('products', products)
+  const products = useSelector(selectProducts);
+  const [productsFilter, setProductsFilter] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
 
   useEffect(() => {
     if (!isAuthenticated) navigate('/login')
   }, [isAuthenticated])
+
+  useEffect(() => {
+    if (searchWord) {
+      const filter: any = searchFilter(searchWord, products);
+      setProductsFilter(filter);
+    } else setProductsFilter(products);
+  }, [searchWord]);
+
+  useEffect(() => {
+    if (products?.length) setProductsFilter(products);
+  }, [products]);
 
   useEffect(() => {
     const getProductsFunc = async () => {
@@ -39,17 +53,12 @@ const Products: React.FC = () => {
           <input
             type='text'
             placeholder='Ej Snikers'
-          //onChange={(e) => setEmail(e.target.value)}
-          //onBlur={() => setEmailValid(emailRegex.test(email))}
-          //className={!emailValid ? 'border-error' : ''}
+            onChange={(e) => setSearchWord(e?.target?.value)}
           />
-        </div>
-        <div>
-          <button className='button b-blue'>Buscar</button>
         </div>
       </div>
       <div className='div-table'>
-        <Table products={products} />
+        <Table products={productsFilter} />
       </div>
     </div>
   )
