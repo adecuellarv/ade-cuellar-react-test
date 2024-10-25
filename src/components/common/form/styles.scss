@@ -1,0 +1,18 @@
+.div-form {
+  width: 100%;
+  box-shadow: 10px 10px 19px -8px rgba(117, 117, 117, 1);
+  padding: 20px;
+
+  .two-colums{
+    display: flex;
+    div{
+      flex: 1;
+      margin: 5px;
+    }
+  }
+  .img-product-form{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+}

@@ -5,6 +5,7 @@ import store from './store/store';
 import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import NotFound from './pages/not-found/NotFound';
+import Product from './pages/product/Product';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import PrivateRoute from './components/common/PrivateRoute';
 import Header from './components/common/header/Header';
@@ -34,6 +35,7 @@ const MainLayout: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<RedirectBasedOnAuth />} />
         <Route path="/products" element={<PrivateRoute element={<Products />} />} />
+        <Route path="/producto/:id" element={<PrivateRoute element={<Product />} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

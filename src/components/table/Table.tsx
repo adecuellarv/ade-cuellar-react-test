@@ -1,5 +1,6 @@
 
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
@@ -14,7 +15,7 @@ interface TableProps {
 }
 let PageSize = 5;
 const Table: React.FC<TableProps> = ({ products, currentPage, setCurrentPage }) => {
-
+  const navigate = useNavigate();
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
@@ -50,7 +51,7 @@ const Table: React.FC<TableProps> = ({ products, currentPage, setCurrentPage }) 
 
   const handleRowClick = (event: any) => {
     const clickedProduct = event.data;
-    console.log('Clicked product:', clickedProduct);
+    navigate(`/producto/${clickedProduct?.id}`);
   };
 
   return (
@@ -59,7 +60,7 @@ const Table: React.FC<TableProps> = ({ products, currentPage, setCurrentPage }) 
         <DataTable
           value={currentTableData}
           sortMode="multiple"
-          tableStyle={{ minWidth: '60rem' }}
+          tableStyle={{ minWidth: '60rem', cursor: 'pointer' }}
           onRowClick={handleRowClick}
         >
           <Column field="title" header="Nombre" body={titleBodyTemplate} sortable></Column>

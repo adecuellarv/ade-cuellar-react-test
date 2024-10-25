@@ -49,7 +49,7 @@ const Products: React.FC = () => {
   }, [])
 
   return (
-    <div>
+    <>
       <div className='div-search'>
         <div className='container-input'>
           <input
@@ -66,7 +66,7 @@ const Products: React.FC = () => {
           setCurrentPage={setCurrentPage}
         />
       </div>
-    </div>
+    </>
   )
 }
 
