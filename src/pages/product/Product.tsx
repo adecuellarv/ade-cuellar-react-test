@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProduct } from '../../api/restProducts';
+import Swal from 'sweetalert2';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Button } from 'primereact/button';
+import { getProduct, deleteProduct } from '../../api/restProducts';
 import Form from '../../components/common/form/Form';
 import './styles.scss';
 
 const Product: React.FC = () => {
+  const navigate = useNavigate();
   const [infoProduct, setInfoProduct] = useState<any>(null);
   const { id } = useParams()
+
+  const handleDeleteProduct = async () => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, proceder',
+      cancelButtonText: 'No, cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const resp = await deleteProduct(id);
+        if(resp) navigate('/products')
+      }
+    });
+  }
 
   useEffect(() => {
     const getProductFunc = async () => {
@@ -28,6 +47,9 @@ const Product: React.FC = () => {
           <Form
             infoProduct={infoProduct}
           />
+          <div className='delete-container'>
+            <Button onClick={handleDeleteProduct} severity="danger">Eliminar producto</Button>
+          </div>
         </div>
       }
     </>

@@ -15,3 +15,7 @@ export const postProduct = async (data: any) => {
 export const putProduct = async (id: any, data: any) => {
   return await axios.put('' + id, data)
 }
+
+export const deleteProduct = async (id: any) => {
+  return await axios.delete('' + id)
+}
