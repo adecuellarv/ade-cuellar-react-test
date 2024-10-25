@@ -17,12 +17,14 @@ const Products: React.FC = () => {
   const products = useSelector(selectProducts);
   const [productsFilter, setProductsFilter] = useState([]);
   const [searchWord, setSearchWord] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (!isAuthenticated) navigate('/login')
   }, [isAuthenticated])
 
   useEffect(() => {
+    setCurrentPage(1);
     if (searchWord) {
       const filter: any = searchFilter(searchWord, products);
       setProductsFilter(filter);
@@ -58,7 +60,11 @@ const Products: React.FC = () => {
         </div>
       </div>
       <div className='div-table'>
-        <Table products={productsFilter} />
+        <Table 
+          products={productsFilter}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   )
