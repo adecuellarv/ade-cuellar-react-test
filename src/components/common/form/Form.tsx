@@ -4,14 +4,13 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import Swal from 'sweetalert2';
-import { Product } from '../../../models';
 import UploadFile from './upload-file/UploadFile';
 import { getCategories } from '../../../api/restCategories';
 import { postProduct, putProduct } from '../../../api/restProducts';
 import './styles.scss';
 
 interface FormProps {
-  infoProduct: Product;
+  infoProduct: any;
 }
 
 const Form: React.FC<FormProps> = ({ infoProduct }) => {
@@ -31,9 +30,14 @@ const Form: React.FC<FormProps> = ({ infoProduct }) => {
         image,
         category: category.name
       }
-      const resp = await putProduct(infoProduct.id, values);
-      if(resp) navigate('/products');
-    }else{
+      if (infoProduct?.title) {
+        const resp = await putProduct(infoProduct.id, values);
+        if (resp) navigate('/products');
+      } else {
+        const resp = await postProduct(values);
+        if (resp) navigate('/products');
+      }
+    } else {
       Swal.fire({
         title: 'Campos faltantes',
         text: '',
@@ -42,6 +46,10 @@ const Form: React.FC<FormProps> = ({ infoProduct }) => {
       })
     }
   }
+
+  const handleImageUpload = (url: string) => {
+    setImage(url);
+  };
 
   useEffect(() => {
     if (categories?.length && infoProduct?.title) {
@@ -97,7 +105,7 @@ const Form: React.FC<FormProps> = ({ infoProduct }) => {
               <label>Imagen</label>
               <div className='two-colums'>
                 <div>
-                  <UploadFile />
+                  <UploadFile onImageUpload={handleImageUpload} />
                 </div>
               </div>
             </div>

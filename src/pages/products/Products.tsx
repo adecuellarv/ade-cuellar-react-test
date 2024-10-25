@@ -50,6 +50,9 @@ const Products: React.FC = () => {
 
   return (
     <>
+      <div className='div-add'>
+        <Button onClick={() => navigate('/agregar')}>Agregar nuevo</Button>
+      </div>
       <div className='div-search'>
         <div className='container-input'>
           <input
@@ -60,7 +63,7 @@ const Products: React.FC = () => {
         </div>
       </div>
       <div className='div-table'>
-        <Table 
+        <Table
           products={productsFilter}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

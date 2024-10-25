@@ -15,7 +15,6 @@ const Product: React.FC = () => {
     }
     if (id) getProductFunc();
   }, [id]);
-  console.log('#prid', infoProduct)
   return (
     <>
       {infoProduct?.title &&
