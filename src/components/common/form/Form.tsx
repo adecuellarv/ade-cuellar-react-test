@@ -32,10 +32,28 @@ const Form: React.FC<FormProps> = ({ infoProduct }) => {
       }
       if (infoProduct?.title) {
         const resp = await putProduct(infoProduct.id, values);
-        if (resp) navigate('/products');
+        if (resp) {
+          Swal.fire({
+            title: "Producto Actualizado",
+            text: "",
+            icon: "success"
+          });
+          setTimeout(() => {
+            navigate('/products')
+          }, 400);
+        }
       } else {
         const resp = await postProduct(values);
-        if (resp) navigate('/products');
+        if (resp) {
+          Swal.fire({
+            title: "Producto Agregado",
+            text: "",
+            icon: "success"
+          });
+          setTimeout(() => {
+            navigate('/products')
+          }, 400);
+        }
       }
     } else {
       Swal.fire({

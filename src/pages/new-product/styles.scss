@@ -20,4 +20,16 @@
     margin-top: 20px;
     margin-left: 20px;
   }
+  @media (max-width: 768px) {
+    padding: 50px 10px !important;
+  }
+}
+.btn-return {
+  margin-top: 10px;
+  margin-left: 10px;
+  i {
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
 }

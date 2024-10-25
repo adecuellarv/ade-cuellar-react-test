@@ -9,6 +9,9 @@
       flex: 1;
       margin: 5px;
     }
+    @media (max-width: 768px) {
+      display: block;
+    }
   }
   .img-product-form{
     width: 70px;

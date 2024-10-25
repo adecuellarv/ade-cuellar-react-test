@@ -22,7 +22,16 @@ const Product: React.FC = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const resp = await deleteProduct(id);
-        if(resp) navigate('/products')
+        if (resp) {
+          Swal.fire({
+            title: "Producto Eliminado",
+            text: "",
+            icon: "success"
+          });
+          setTimeout(() => {
+            navigate('/products')
+          }, 400);
+        }
       }
     });
   }
@@ -36,6 +45,13 @@ const Product: React.FC = () => {
   }, [id]);
   return (
     <>
+      <div className='btn-return'>
+        <i
+          className="pi pi-arrow-left"
+          style={{ fontSize: '1rem' }}
+          onClick={() => navigate('/products')}
+        > Regresar</i>
+      </div>
       {infoProduct?.title &&
         <div className='content-product-single'>
           <div className='header-product'>

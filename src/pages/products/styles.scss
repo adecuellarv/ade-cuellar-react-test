@@ -8,6 +8,14 @@
   .div-btn-search{
     margin-top: 6px;
   }
+  @media (max-width: 768px) {
+    width: 90%; 
+    flex-direction: column;
+
+    .div-btn-search {
+      margin-top: 12px; 
+    }
+  }
 }
 .div-table{
   width: 95%;

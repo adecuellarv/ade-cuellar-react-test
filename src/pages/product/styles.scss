@@ -1,18 +1,18 @@
-.content-product-single{
+.content-product-single {
   padding: 50px;
-  .div-form{
+  .div-form {
     width: 100%;
-    box-shadow: 10px 10px 19px -8px rgba(117,117,117,1);
+    box-shadow: 10px 10px 19px -8px rgba(117, 117, 117, 1);
     padding: 20px;
     background: #fff;
   }
-  .header-product{
+  .header-product {
     display: flex;
-    div{
+    div {
       flex: 1;
     }
   }
-  .img-thm{
+  .img-thm {
     width: 50px;
     height: 50px;
     object-fit: contain;
@@ -20,8 +20,21 @@
     margin-top: 20px;
     margin-left: 20px;
   }
-  .delete-container{
+  .delete-container {
     text-align: center;
     margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 50px 10px !important;
+  }
+}
+.btn-return {
+  margin-top: 10px;
+  margin-left: 10px;
+  i {
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
   }
 }
