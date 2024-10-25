@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
+import Swal from 'sweetalert2';
 import { Product } from '../../../models';
 import UploadFile from './upload-file/UploadFile';
 import { getCategories } from '../../../api/restCategories';
+import { postProduct, putProduct } from '../../../api/restProducts';
 import './styles.scss';
 
 interface FormProps {
@@ -12,24 +15,48 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ infoProduct }) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState<any>(null);
   const [image, setImage] = useState('')
   const [categories, setCategories] = useState([]);
 
-  const onUpload = () => {
-
+  const save = async () => {
+    if (title && price && image && category) {
+      const values = {
+        title,
+        price,
+        description: 'lorem ipsum set',
+        image,
+        category: category.name
+      }
+      const resp = await putProduct(infoProduct.id, values);
+      if(resp) navigate('/products');
+    }else{
+      Swal.fire({
+        title: 'Campos faltantes',
+        text: '',
+        icon: 'error',
+        confirmButtonText: '¡Entendido!'
+      })
+    }
   }
+
+  useEffect(() => {
+    if (categories?.length && infoProduct?.title) {
+      const position = categories.findIndex((i: any) => i.name === infoProduct?.category);
+      if (position !== -1) setCategory(categories[position])
+    }
+  }, [categories]);
 
   useEffect(() => {
     if (infoProduct?.title) {
       setTitle(infoProduct?.title);
       setPrice(infoProduct.price)
       setImage(infoProduct.image);
-      setCategory(infoProduct.category);
     }
-  }, []); console.log('catego', category)
+  }, []);
 
   useEffect(() => {
     const getCategoriesFunc = async () => {
@@ -83,7 +110,7 @@ const Form: React.FC<FormProps> = ({ infoProduct }) => {
             </div>
           </div>
           <div className='container-input' style={{ textAlign: 'right' }}>
-            <Button>Enviar</Button>
+            <Button onClick={save}>Enviar</Button>
           </div>
         </div>
       </div>

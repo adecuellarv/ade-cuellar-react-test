@@ -9,9 +9,9 @@ export const getProduct = async (id: any) => {
 }
 
 export const postProduct = async (data: any) => {
-  return await axios.post(data)
+  return await axios.post('', data)
 }
 
-export const putProduct = async (data: any) => {
-  return await axios.put(data)
+export const putProduct = async (id: any, data: any) => {
+  return await axios.put('' + id, data)
 }
